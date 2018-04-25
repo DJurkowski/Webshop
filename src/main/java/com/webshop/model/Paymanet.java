@@ -1,27 +1,43 @@
 package com.webshop.model;
 
+import javax.persistence.*;
 import java.util.Date;
 
+@Entity
 public class Paymanet {
 
-    private Long customerNumber;
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    private Long id;
     private Long checkNumber;
     private Date paymentDate;
     private Float amount;
 
-    public Paymanet(Long customerNumber, Long checkNumber, Date paymentDate, Float amount) {
-        this.customerNumber = customerNumber;
+    @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "customerNumber")
+    private Customer customer;
+
+    public Paymanet(Long checkNumber, Date paymentDate, Float amount, Customer customer) {
         this.checkNumber = checkNumber;
         this.paymentDate = paymentDate;
         this.amount = amount;
+        this.customer = customer;
     }
 
-    public Long getCustomerNumber() {
-        return customerNumber;
+    public Long getId() {
+        return id;
     }
 
-    public void setCustomerNumber(Long customerNumber) {
-        this.customerNumber = customerNumber;
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public Customer getCustomer() {
+        return customer;
+    }
+
+    public void setCustomer(Customer customer) {
+        this.customer = customer;
     }
 
     public Long getCheckNumber() {

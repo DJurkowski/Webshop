@@ -1,8 +1,12 @@
 package com.webshop.model;
 
+import javax.persistence.*;
+
+@Entity
+@PrimaryKeyJoinColumn(name = "id")
 public class Customer extends Person {
 
-    private Long id;
+
     private Long customerNumber;
     private String address;
     private String city;
@@ -11,7 +15,10 @@ public class Customer extends Person {
     private String country;
     private Integer creditLimit;
 
-    public Customer(String firstName, String secondName, String email, String phone, Long customerNumber, String address, String city, String state, String postalCode, String country, Integer creditLimit) {
+    @OneToOne(mappedBy = "customer")
+    private Paymanet paymanet;
+
+    public Customer(String firstName, String secondName, String email, String phone, Long customerNumber, String address, String city, String state, String postalCode, String country, Integer creditLimit, Paymanet paymanet) {
         super(firstName, secondName, email, phone);
         this.customerNumber = customerNumber;
         this.address = address;
@@ -20,6 +27,7 @@ public class Customer extends Person {
         this.postalCode = postalCode;
         this.country = country;
         this.creditLimit = creditLimit;
+        this.paymanet = paymanet;
     }
 
     public Long getCustomerNumber() {
@@ -76,5 +84,13 @@ public class Customer extends Person {
 
     public void setCreditLimit(Integer creditLimit) {
         this.creditLimit = creditLimit;
+    }
+
+    public Paymanet getPaymanet() {
+        return paymanet;
+    }
+
+    public void setPaymanet(Paymanet paymanet) {
+        this.paymanet = paymanet;
     }
 }
