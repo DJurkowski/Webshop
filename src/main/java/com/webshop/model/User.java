@@ -1,9 +1,6 @@
 package com.webshop.model;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
 import javax.validation.constraints.*;
 
 @Entity
@@ -37,6 +34,10 @@ public class User {
     @NotNull(message = "You must add your postal code")
     @Pattern(regexp = "[0-9]{2}\\-[0-9]{3}", message = "Pattern: XX-XXX")
     private String postalCode;
+    @NotNull
+    private String password;
+    @Transient
+    private String re_password;
 
     public Long getId() {
         return id;
@@ -116,5 +117,21 @@ public class User {
 
     public void setPostalCode(String postalCode) {
         this.postalCode = postalCode;
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
+    }
+
+    public String getRe_password() {
+        return re_password;
+    }
+
+    public void setRe_password(String re_password) {
+        this.re_password = re_password;
     }
 }

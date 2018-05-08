@@ -12,9 +12,9 @@
     <jsp:include page=".menu.jsp"/>
 
 <div class="container" id="homeDiv">
-            <span style="color: green;">
-            <c:if test="${blad == 'DELETE'}">
-                <c:out value="${'Account deleted correctly'}"></c:out>
+            <span class="Goods">
+            <c:if test="${good == 'GOOD'}">
+                <c:out value="${'Account are created correctly'}"></c:out>
             </c:if>
             </span>
     <div class="jumbotron text-center">

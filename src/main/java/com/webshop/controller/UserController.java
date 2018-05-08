@@ -39,10 +39,15 @@ public class UserController {
         if(bindingResult.hasErrors()){
             return "registration";
         }else{
+            if(user.getPassword().equals(user.getRe_password())){
+                userService.save(user);
+                request.setAttribute("good", "GOOD");
+                return "redirect:/";
+            }else{
+                request.setAttribute("pass","NOPASS");
+                return "registration";
+            }
 
-            userService.save(user);
-            request.setAttribute("good", "GOOD");
-            return "redirect:/";
         }
     }
 }

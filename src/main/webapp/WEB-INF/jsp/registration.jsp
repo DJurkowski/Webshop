@@ -7,6 +7,7 @@
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <html>
 <head>
     <%--HEAD content--%>
@@ -18,6 +19,7 @@
 
 <div class="container text-center">
     <h3>Create Account</h3>
+
     <div class="form-horizontal">
     <form:form modelAttribute="user" action="registration" method="post">
         <div class="form-group">
@@ -89,6 +91,23 @@
             <label class="control-label col-md-3">Postal Code:</label>
             <div class="col-md-7"><form:input class="form-control" path="postalCode"/>
             <span class="Errors"><form:errors path="postalCode" cssClass="error"/></span>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="control-label col-md-3">Password:</label>
+            <div class="col-md-7"><form:password class="form-control" path="password"/>
+                <span class="Errors"><form:errors path="password" cssClass="error"/></span>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="control-label col-md-3">Confirm Password:</label>
+            <div class="col-md-7"><form:password class="form-control" path="re_password"/>
+                <span class="Errors"><form:errors path="re_password" cssClass="error"/></span>
+                <span class="Errors">
+                <c:if test="${pass =='NOPASS'}">
+                    <c:out value="${'Passwords are incorrect'}"></c:out>
+                </c:if>
+                </span>
             </div>
         </div>
         <div class="form-group">
