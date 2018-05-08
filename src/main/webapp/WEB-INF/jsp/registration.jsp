@@ -9,45 +9,56 @@
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 <html>
 <head>
+    <%--HEAD content--%>
     <jsp:include page=".head.jsp"/>
 </head>
 <body>
+<%--MENU content--%>
+<jsp:include page=".menu.jsp"/>
 
-<form:form modelAttribute="user" action="registration" method="post">
-    <table>
-        <tr>
-            <td>Nickname:</td>
-            <td><form:input path="nick"/></td>
-            <td class="Errors"><form:errors path="nick" cssClass="error"/></td>
-        </tr>
-        <tr>
-            <td>FirstName:</td>
-            <td><form:input path="firstName"/></td>
-            <td class="Errors"><form:errors path="firstName" cssClass="error"/></td>
-        </tr>
-        <tr>
-            <td>SecondName:</td>
-            <td><form:input path="secondName"/></td>
-            <td class="Errors"><form:errors path="secondName" cssClass="error"/></td>
-        </tr>
-        <tr>
-            <td>Age:</td>
-            <td><form:input path="age"/></td>
-            <td class="Errors"><form:errors path="age"/></td>
-        </tr>
-        <tr>
-            <td>Email:</td>
-            <td><form:input path="email"/></td>
-            <td class="Errors"><form:errors path="email" cssClass="error"/></td>
-        </tr>
-        <tr>
-            <td>Phone:</td>
-            <td><form:input path="phone"/></td>
-            <td class="Errors"><form:errors path="phone" cssClass="error"/></td>
-        </tr>
-        <tr>
-            <td>State:</td>
-            <td><form:select path="state">
+<div class="container text-center">
+    <h3>Create Account</h3>
+    <div class="form-horizontal">
+    <form:form modelAttribute="user" action="registration" method="post">
+        <div class="form-group">
+            <label class="control-label col-md-3">Nickname:</label>
+            <div class="col-md-7"><form:input class="form-control" path="nick"/>
+                <span class="Errors"><form:errors path="nick" cssClass="error"/></span>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="control-label col-md-3">FirstName:</label>
+            <div class="col-md-7"><form:input class="form-control" path="firstName"/>
+            <span class="Errors"><form:errors path="firstName" cssClass="error"/></span>
+        </div>
+        </div>
+        <div class="form-group">
+            <label class="control-label col-md-3">SecondName:</label>
+            <div class="col-md-7"><form:input class="form-control" path="secondName"/>
+            <span class="Errors"><form:errors path="secondName" cssClass="error"/></span>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="control-label col-md-3">Age:</label>
+            <div class="col-md-7"><form:input class="form-control" path="age"/>
+            <span class="Errors"><form:errors path="age" cssClass="error"/></span>
+        </div>
+        </div>
+        <div class="form-group">
+            <label class="control-label col-md-3">Email:</label>
+            <div class="col-md-7"><form:input class="form-control" path="email"/>
+            <span class="Errors"><form:errors path="email" cssClass="error"/></span>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="control-label col-md-3">Phone:</label>
+            <div class="col-md-7"><form:input class="form-control" path="phone"/>
+            <span class="Errors"><form:errors path="phone" cssClass="error"/></span>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="control-label col-md-3">State:</label>
+            <div class="col-md-7"><form:select class="form-control" path="state">
                 <form:option value="Dolnośląskie">Dolnośląskie</form:option>
                 <form:option value="Kujawsko-Pomorskie">Kujawsko-Pomorskie</form:option>
                 <form:option value="Lubelskie">Lubelskie</form:option>
@@ -65,25 +76,30 @@
                 <form:option value="Wielkopolskie">Wielkopolskie</form:option>
                 <form:option value="Zachodnio-Pomorskie">Zachodnio-Pomorskie</form:option>
             </form:select>
-            </td>
-            <td class="Errors"><form:errors path="state" cssClass="error"/></td>
-        </tr>
-        <tr>
-            <td>City:</td>
-            <td><form:input path="city"/></td>
-            <td class="Errors"><form:errors path="city" cssClass="error"/></td>
-        </tr>
-        <tr>
-            <td>Postal Code:</td>
-            <td><form:input path="postalCode"/></td>
-            <td class="Errors"><form:errors path="postalCode"  cssClass="error"/></td>
-        </tr>
-        <tr>
-            <td>
-                <button type="submit" value="Save">Submit</button>
-            </td>
-        </tr>
-    </table>
-</form:form>
+            <span class="Errors"><form:errors path="state" cssClass="error"/></span>
+        </div>
+        </div>
+        <div class="form-group">
+            <label class="control-label col-md-3">City:</label>
+            <div class="col-md-7"><form:input class="form-control" path="city"/>
+            <span class="Errors"><form:errors path="city" cssClass="error"/></span>
+        </div>
+        </div>
+        <div class="form-group">
+            <label class="control-label col-md-3">Postal Code:</label>
+            <div class="col-md-7"><form:input class="form-control" path="postalCode"/>
+            <span class="Errors"><form:errors path="postalCode" cssClass="error"/></span>
+            </div>
+        </div>
+        <div class="form-group">
+                <button type="submit" class="btn btn-primary" value="Save">Submit</button>
+        </div>
+    </form:form>
+    </div>
+</div>
+<%--/CONTENT--%>
+
+<%--LOAD js scripts--%>
+<jsp:include page=".script.jsp"></jsp:include>
 </body>
 </html>

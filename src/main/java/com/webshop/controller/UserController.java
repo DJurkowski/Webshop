@@ -20,6 +20,11 @@ public class UserController {
     @Autowired
     private UserService userService;
 
+    @GetMapping("/")
+    public String index(){
+        return "index";
+    }
+
     @GetMapping("/registration")
     public String home(Model model) {
 
@@ -37,7 +42,7 @@ public class UserController {
 
             userService.save(user);
             request.setAttribute("good", "GOOD");
-            return "results";
+            return "redirect:/";
         }
     }
 }
