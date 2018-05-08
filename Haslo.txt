@@ -1,4 +1,0 @@
-//Baza danych
-
-    login: webshoper
-    haslo: webshoper
