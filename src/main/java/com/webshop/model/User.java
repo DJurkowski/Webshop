@@ -2,6 +2,7 @@ package com.webshop.model;
 
 import javax.persistence.*;
 import javax.validation.constraints.*;
+import java.util.Date;
 
 @Entity
 public class User {
@@ -36,6 +37,7 @@ public class User {
     @Pattern(regexp = "[0-9]{2}\\-[0-9]{3}", message = "Pattern: XX-XXX")
     private String postalCode;
     private Status status;
+    private Date createDate;
     @NotEmpty(message = "You must add password")
     private String password;
     @Transient
@@ -144,5 +146,13 @@ public class User {
 
     public void setStatus(Status status) {
         this.status = status;
+    }
+
+    public Date getCreateDate() {
+        return createDate;
+    }
+
+    public void setCreateDate(Date createDate) {
+        this.createDate = createDate;
     }
 }

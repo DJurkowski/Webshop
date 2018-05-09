@@ -5,6 +5,7 @@ import com.webshop.repository.UserRepository;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
+import java.util.Date;
 
 @Service
 @Transactional
@@ -17,6 +18,7 @@ public class UserService {
     }
 
     public void save(User user){
+        user.setCreateDate(new Date());
         userRepository.save(user);
     }
 
