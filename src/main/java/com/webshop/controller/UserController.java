@@ -1,5 +1,6 @@
 package com.webshop.controller;
 
+import com.webshop.model.Status;
 import com.webshop.model.User;
 import com.webshop.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,33 +22,55 @@ public class UserController {
     private UserService userService;
 
     @GetMapping("/")
-    public String index(){
+    public String index() {
         return "index";
     }
 
     @GetMapping("/registration")
     public String home(Model model) {
 
-         model.addAttribute("user",new User());
+        model.addAttribute("user", new User());
 
         return "registration";
     }
 
     @RequestMapping(value = "/registration", method = RequestMethod.POST)
-    public String register(@ModelAttribute("user") @Valid User user, BindingResult bindingResult, HttpServletRequest request){
+    public String register(@ModelAttribute("user") @Valid User user, BindingResult bindingResult, HttpServletRequest request) {
 
-        if(bindingResult.hasErrors()){
+        if (bindingResult.hasErrors()) {
             return "registration";
-        }else{
-            if(user.getPassword().equals(user.getRe_password())){
-                userService.save(user);
-                request.setAttribute("good", "GOOD");
-                return "redirect:/";
-            }else{
-                request.setAttribute("pass","NOPASS");
+        } else {
+            if (userService.nickIsValid(user.getNick())) {
+                if (userService.mailIsValid(user.getEmail())) {
+                    if (user.getPassword().equals(user.getRe_password()) && user.getPassword() != null) {
+                        user.setStatus(Status.CUSTOMER);
+                        userService.save(user);
+                        request.setAttribute("good", "GOOD");
+                        return "index";
+                    } else {
+                        request.setAttribute("pass", "NOPASS");
+                        return "registration";
+                    }
+                } else {
+                    request.setAttribute("mail", "WRONG");
+                    return "registration";
+                }
+
+            } else {
+                request.setAttribute("nick", "WRONG");
                 return "registration";
             }
-
         }
     }
+
+    @GetMapping("/login")
+    public String login() {
+
+        return "login";
+    }
+//    @RequestMapping(value = "/check-user", method = RequestMethod.POST)
+//    public String checkUser(@ModelAttribute @Valid User user, BindingResult bindingResult, HttpServletRequest request){
+//
+//        HttpSession session = request.getSession(true);
+//    }
 }

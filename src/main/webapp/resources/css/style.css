@@ -5,3 +5,20 @@
 .Goods{
     color:green;
 }
+.footer {
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    /* Set the fixed height of the footer here */
+    height: 60px;
+    background-color: #f5f5f5;
+}
+
+.footerCon {
+    width: auto;
+    max-width: 680px;
+    padding: 0 15px;
+}
+.footerCon .text-muted {
+    margin: 20px 0;
+}

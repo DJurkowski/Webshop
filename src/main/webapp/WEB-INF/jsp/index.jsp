@@ -21,6 +21,8 @@
         <h1>Welcome to WebShopApp</h1>
     </div>
 </div>
+    <%--&lt;%&ndash; FOOTER content&ndash;%&gt;--%>
+    <%--<jsp:include page=".footer.jsp"/>--%>
 
     <%--JS content--%>
     <jsp:include page=".script.jsp"/>

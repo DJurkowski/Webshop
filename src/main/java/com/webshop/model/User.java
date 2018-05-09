@@ -12,12 +12,13 @@ public class User {
 
     @NotNull
     @Size(min = 2, max = 20, message = "Nickname must have from 2 to 20 chars")
+    @Column(unique = true)
     private String nick;
-    @NotNull(message = "You must add your first name")
+    @NotEmpty(message = "You must add your first name")
     private String firstName;
-    @NotNull(message = "You must add your second name")
+    @NotEmpty(message = "You must add your second name")
     private String secondName;
-    @NotNull(message = "You must add your address email")
+    @NotEmpty(message = "You must add your address email")
     @Email(message = "Address email is invalid")
     private String email;
     @NotNull(message = "You must add your phone number")
@@ -27,17 +28,19 @@ public class User {
     @Digits(integer = 150, fraction = 3,message = "Age is a digit")
     @Min(value = 18, message = "Musisz mieć 18 lat")
     private Integer age;
-    @NotNull(message = "You must add your city")
+    @NotEmpty(message = "You must add your city")
     private String city;
-    @NotNull(message = "You must add your state")
+    @NotEmpty(message = "You must add your state")
     private String state;
-    @NotNull(message = "You must add your postal code")
+    @NotEmpty(message = "You must add your postal code")
     @Pattern(regexp = "[0-9]{2}\\-[0-9]{3}", message = "Pattern: XX-XXX")
     private String postalCode;
-    @NotNull
+    private Status status;
+    @NotEmpty(message = "You must add password")
     private String password;
     @Transient
     private String re_password;
+
 
     public Long getId() {
         return id;
@@ -133,5 +136,13 @@ public class User {
 
     public void setRe_password(String re_password) {
         this.re_password = re_password;
+    }
+
+    public Status getStatus() {
+        return status;
+    }
+
+    public void setStatus(Status status) {
+        this.status = status;
     }
 }

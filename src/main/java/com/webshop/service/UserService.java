@@ -19,4 +19,22 @@ public class UserService {
     public void save(User user){
         userRepository.save(user);
     }
+
+    public boolean nickIsValid(String nick){
+        System.out.println(userRepository.findByNick(nick));
+        if(userRepository.findByNick(nick)!=null){
+            return false;
+        }else{
+            return true;
+        }
+    }
+
+    public boolean mailIsValid(String mail){
+        System.out.println(userRepository.findByEmail(mail));
+        if(userRepository.findByEmail(mail)!=null){
+            return false;
+        }else{
+            return true;
+        }
+    }
 }
