@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
 
 @Controller
@@ -64,13 +65,54 @@ public class UserController {
     }
 
     @GetMapping("/login")
-    public String login() {
-
+    public String login(Model model) {
+        model.addAttribute("user", new User());
         return "login";
     }
-//    @RequestMapping(value = "/check-user", method = RequestMethod.POST)
-//    public String checkUser(@ModelAttribute @Valid User user, BindingResult bindingResult, HttpServletRequest request){
-//
-//        HttpSession session = request.getSession(true);
-//    }
+
+    @RequestMapping(value = "/check-user", method = RequestMethod.POST)
+    public String checkUser(@ModelAttribute @Valid User user, BindingResult bindingResult, HttpServletRequest request) {
+
+        HttpSession session = request.getSession(true);
+
+        if (!userService.nickIsValid(user.getNick())) {
+            User sessionUser = userService.findUser(user.getNick());
+
+            if (userService.passwordIsValid(sessionUser, user.getPassword())) {
+                //creating user session
+                session.setAttribute("user", sessionUser);
+                request.setAttribute("nickname", sessionUser);
+                return "indexCustomer";
+            } else {
+                request.setAttribute("pass", "WRONG");
+                return "login";
+            }
+
+        } else {
+            request.setAttribute("nick", "WRONG");
+            return "login";
+        }
+
+    }
+
+    @GetMapping("/user-home")
+    public String user_home(HttpServletRequest request, HttpSession session){
+
+        User sessionUser = (User) session.getAttribute("user");
+//        model.addAttribute("user", sessionUser);
+
+        if(sessionUser !=null){
+            request.setAttribute("nickname", sessionUser);
+            return "indexCustomer";
+        }else{
+            request.setAttribute("register","BAD");
+            return "login";
+        }
+    }
+
+    @GetMapping("/logout")
+    public String logout(HttpSession session, HttpServletRequest request){
+        session.invalidate();
+        return "index";
+    }
 }

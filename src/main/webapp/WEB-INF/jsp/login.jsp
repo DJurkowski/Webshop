@@ -17,21 +17,39 @@
 <%--MENU content--%>
 <jsp:include page=".menu.jsp"/>
 <div class="container text-center">
-    <h3>Create Account</h3>
+    <span class="Errors">
+                        <c:if test="${regiser =='BAD'}">
+                            <c:out value="${'You are not sign in.Please sign in or create new account'}"></c:out>
+                        </c:if>
+                     </span>
+    <h3>Login</h3>
 
     <div class="form-horizontal">
-        <form:form modelAttribute="user" action="login" method="post">
+        <form:form modelAttribute="user" action="check-user" method="post">
             <div class="form-group">
                 <label class="control-label col-md-3">Nickname:</label>
                 <div class="col-md-7"><form:input class="form-control" path="nick"/>
                     <span class="Errors"><form:errors path="nick" cssClass="error"/></span>
+                    <span class="Errors">
+                        <c:if test="${nick =='WRONG'}">
+                            <c:out value="${'Wrong nick'}"></c:out>
+                        </c:if>
+                     </span>
                 </div>
             </div>
             <div class="form-group">
                 <label class="control-label col-md-3">Password:</label>
                 <div class="col-md-7"><form:password class="form-control" path="password"/>
                     <span class="Errors"><form:errors path="password" cssClass="error"/></span>
+                    <span class="Errors">
+                        <c:if test="${pass =='WRONG'}">
+                            <c:out value="${'Wrong password'}"></c:out>
+                        </c:if>
+                     </span>
                 </div>
+            </div>
+            <div class="form-group">
+                <button type="submit" class="btn btn-primary" value="Login">Login</button>
             </div>
         </form:form>
     </div>

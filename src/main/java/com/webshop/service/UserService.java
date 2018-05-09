@@ -20,6 +20,8 @@ public class UserService {
         userRepository.save(user);
     }
 
+    public User findUser(String nick){ return userRepository.findByNick(nick);}
+
     public boolean nickIsValid(String nick){
         System.out.println(userRepository.findByNick(nick));
         if(userRepository.findByNick(nick)!=null){
@@ -35,6 +37,15 @@ public class UserService {
             return false;
         }else{
             return true;
+        }
+    }
+
+    public boolean passwordIsValid(User user, String password){
+
+        if(user.getPassword().equals(password)){
+            return true;
+        }else{
+            return false;
         }
     }
 }
