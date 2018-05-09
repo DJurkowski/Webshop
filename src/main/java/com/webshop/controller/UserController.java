@@ -96,7 +96,7 @@ public class UserController {
     }
 
     @GetMapping("/user-home")
-    public String user_home(HttpServletRequest request, HttpSession session){
+    public String user_home(HttpServletRequest request, HttpSession session, Model model){
 
         User sessionUser = (User) session.getAttribute("user");
 //        model.addAttribute("user", sessionUser);
@@ -105,6 +105,7 @@ public class UserController {
             request.setAttribute("nickname", sessionUser);
             return "indexCustomer";
         }else{
+            model.addAttribute("user", new User());
             request.setAttribute("register","BAD");
             return "login";
         }
@@ -113,6 +114,7 @@ public class UserController {
     @GetMapping("/logout")
     public String logout(HttpSession session, HttpServletRequest request){
         session.invalidate();
+        request.setAttribute("logout","GOOD");
         return "index";
     }
 }

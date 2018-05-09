@@ -18,7 +18,7 @@
 <jsp:include page=".menu.jsp"/>
 <div class="container text-center">
     <span class="Errors">
-                        <c:if test="${regiser =='BAD'}">
+                        <c:if test="${register =='BAD'}">
                             <c:out value="${'You are not sign in.Please sign in or create new account'}"></c:out>
                         </c:if>
                      </span>
